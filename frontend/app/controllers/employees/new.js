@@ -17,16 +17,16 @@ export default Controller.extend({
       });
     });
   }),
-  previewImage: Ember.observer('file',function () {
-    var file = document.getElementById('file-field').files[0];
-    if (file) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#preview-image').attr('src', e.target.result);
-      }
-      reader.readAsDataURL(file);
-    }
-  }),
+  // previewImage: Ember.observer('file',function () {
+  //   var file = document.getElementById('file-field').files[0];
+  //   if (file) {
+  //     var reader = new FileReader();
+  //     reader.onload = function (e) {
+  //       $('#preview-image').attr('src', e.target.result);
+  //     }
+  //     reader.readAsDataURL(file);
+  //   }
+  // }),
   actions:{
     cancel(){
       this.get('employee').destroyRecord();
@@ -34,7 +34,6 @@ export default Controller.extend({
     },
     saveModel(){
       this.get('employee').save();
-      alert("Employee Added!");
       this.transitionToRoute('employees.index');
     },
     addSkill(item){
@@ -50,5 +49,5 @@ export default Controller.extend({
       let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return emailPattern.test(inputValue);
     }
-  }],
+  }]
 });

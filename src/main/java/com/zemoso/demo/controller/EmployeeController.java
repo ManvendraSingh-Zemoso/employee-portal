@@ -24,12 +24,20 @@ public class EmployeeController {
     @Autowired
     private EmployeeMapper employeeMapper;
 
+    @RequestMapping(path = "/{id}",method = RequestMethod.GET)
+    public ResponseEntity <Map<String,Map<String,String>>> getEmployee(@PathVariable Long id){
+        Employee employee = employeeService.getEmployee(id);
+        Map<String,Map<String,String>> responseMap = new HashMap<>();
+        responseMap.put(Constant.EMPLOYEE,employeeMapper.employeeToMap(employee));
+        return ResponseEntity.ok().body(responseMap);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity <Map<String,Map<String,String>>> addEmployee(@RequestBody Map<String,Map<String,String>> map){
-        Map<String,String> employee = map.get("employee");
+        Map<String,String> employee = map.get(Constant.EMPLOYEE);
         Employee newEmployee = employeeService.saveEmployee(employeeMapper.mapToEmployee(employee));
         Map<String,Map<String,String>> responseMap = new HashMap<>();
-        responseMap.put("employee",employeeMapper.employeeToMap(newEmployee));
+        responseMap.put(Constant.EMPLOYEE,employeeMapper.employeeToMap(newEmployee));
         return ResponseEntity.ok().body(responseMap);
     }
 
@@ -46,9 +54,10 @@ public class EmployeeController {
         return ResponseEntity.ok().body(responseMap);
     }
 
-    @RequestMapping(path = "/{id}",method = RequestMethod.PUT)
-    private ResponseEntity <Map<String,String>> updateEmployee(@RequestBody Map<String,String> employee, @PathVariable Long id){
+    @RequestMapping(path = "/{id}",method = RequestMethod.PATCH)
+    private ResponseEntity <Map<String,Map<String,String>>> updateEmployee(@RequestBody Map<String,Map<String,String>> map, @PathVariable Long id){
         Employee updateEmployee = employeeService.getEmployee(id);
+        Map<String,String> employee = map.get(Constant.EMPLOYEE);
         updateEmployee.setFirstName(employee.get(Constant.FIRSTNAME));
         updateEmployee.setMiddleName(employee.get(Constant.MIDDLENAME));
         updateEmployee.setLastName(employee.get(Constant.LASTNAME));
@@ -64,6 +73,8 @@ public class EmployeeController {
         updateEmployee.setProject(employee.get(Constant.PROJECT));
         updateEmployee.setReportEmployee(employee.get(Constant.REPORT_EMPLOYEE));
         employeeService.saveEmployee(updateEmployee);
-        return ResponseEntity.ok().body(employeeMapper.employeeToMap(updateEmployee));
+        Map<String,Map<String,String>> responseMap = new HashMap<>();
+        responseMap.put(Constant.EMPLOYEE,employeeMapper.employeeToMap(updateEmployee));
+        return ResponseEntity.ok().body(responseMap);
     }
 }

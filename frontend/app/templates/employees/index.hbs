@@ -15,8 +15,8 @@
       </div>
       {{#each model as |employee|}}
         <div class="flex-20 cards">
-          <div class="layout-column  flex">
-            {{#paper-card class="card" as |card|}}
+          <div class="layout-column  flex" onclick={{action 'openDetails' employee.id}}>
+            {{#paper-card class="card" as |card| }}
               {{card.image size="xl" class="user" src="/assets/images/user.jpeg" alt="User pic not available"}}
               {{#card.title class="card-title" as |title|}}
                 {{#title.text as |text|}}

@@ -12,7 +12,7 @@ export default Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
     controller.set('employee', model.employee);
-    controller.set('reportToEmployees', model.reportToEmployees.get('firstName'));
+    controller.set('reportToEmployees', model.reportToEmployees);
     // let employees = [];
     // model.reportToEmployees.forEach(function (reportToEmployee) {
     //   employees.push(reportToEmployee.get('firstName'));

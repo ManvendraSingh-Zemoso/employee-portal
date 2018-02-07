@@ -1,9 +1,9 @@
 package com.zemoso.demo.repository;
 
-import com.zemoso.demo.model.EmployeeSkill;
+import com.zemoso.demo.model.Project;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeSkillRepository extends CrudRepository<EmployeeSkill,Long>{
+public interface ProjectRepository extends CrudRepository<Project,Long> {
 }

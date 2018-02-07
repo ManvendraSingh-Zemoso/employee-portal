@@ -1,33 +1,12 @@
 {{#paper-form onSubmit=(action "saveModel") as |form|}}
-
-  <div class="layout layout-sm-row">
-    <div class="flex-70"><h1>Add New Employee</h1></div>
-    <div class="layout layout-sm-row">
-      <div class="flex">
-        {{#paper-button class="cancel-button button" raised=true onClick=(action "cancel")}}Cancel{{/paper-button}}
+  <div class="layout-column flex">
+    <div class="flex heading" onclick={{action "cancel"}}><h1>Employee Portal</h1></div>
+    <div class="div-top">
+      <div class="layout-row flex">
+        {{form.input label="First Name" class="edit-name" value=employee.firstName onChange=(action (mut employee.firstName)) required=true}}
+        {{form.input label="Middle Name" class="edit-name" value=employee.middleName onChange=(action (mut employee.middleName))}}
+        {{form.input label="Last Name" class="edit-name" value=employee.lastName onChange=(action (mut employee.lastName)) required=true}}
       </div>
-      <div class="flex">
-        {{#form.submit-button class="button" raised=true}}Add{{/form.submit-button}}
-      </div>
-    </div>
-  </div>
-  {{input type="file" id="file-field" value=file}}
-  <div class="layout layout-sm-column">
-    {{form.input class="flex-30" label="FirstName" required=true maxlength=20 value=employee.firstName
-                 onChange=(action (mut employee.firstName))}}
-    {{form.input class="flex-30" label="MiddleName" maxlength=20 value=employee.middleName
-                 onChange=(action (mut employee.middleName))}}
-    {{form.input class="flex-30" label="LastName" required=true maxlength=20 value=employee.lastName
-                 onChange=(action (mut employee.lastName))}}
-  </div>
-  <div class="layout layout-sm-column">
-    {{form.input class="flex-30" type="email" label="EmailId" required=true value=employee.emailId
-                 onChange=(action (mut employee.emailId)) customValidations=emailValidation}}
-    {{form.input class="flex-30" label="Phone Number" required=true maxlength=10 value=employee.phoneNo
-                 onChange=(action (mut employee.phoneNo))}}
-  </div>
-  <div class="layout layout-sm-column">
-    <div class="flex-30">
       {{#paper-select
         label="Employee Role"
         options=roles
@@ -37,73 +16,103 @@
       as |role|}}
         {{role}}
       {{/paper-select}}
-    </div>
-    <div class="flex-30">
-      {{#paper-select
-        label="Employee Location"
-        options=locations
-        required=true
-        selected=employee.location
-        onChange=(action (mut employee.location))
-      as |location|}}
-        {{location}}
-      {{/paper-select}}
-    </div>
-    <div class="flex-30">
-      <label>
-        Select Joining Date:
-        {{pikaday-input required=true onSelection=(action (mut employee.joinDate))}}
-      </label>
+      <div class="layout-row flex edit-location">
+        <i class="material-icons div-top-icons">location_city</i>
+        {{#paper-select
+          label="Employee Location"
+          options=locations
+          required=true
+          selected=employee.location
+          onChange=(action (mut employee.location))
+        as |location|}}
+          {{location}}
+        {{/paper-select}}
+      </div>
+      <div class="layout-row flex edit-date">
+        <i class="material-icons div-top-icons">date_range</i>
+        <p>Started {{pikaday-input required=true selected=employee.joinDate value=employee.joinDate onSelection=(action (mut employee.joinDate))}}</p>
+      </div>
+      <div class="layout-row flex">
+        {{#paper-button class="cancel-button button" raised=true onClick=(action "cancel")}}Cancel{{/paper-button}}
+        {{#form.submit-button class="button" raised=true primary-button=true}}Save{{/form.submit-button}}
+      </div>
     </div>
   </div>
-  <div class="layout layout-sm-column">
-    {{form.input class="flex-30" label="Picture" required=true value=employee.picture
-                 onChange=(action (mut employee.picture))}}
-    {{form.input class="flex-30" label="Bio" maxlength=300 required=true value=employee.bio
-                 onChange=(action (mut employee.bio))}}
-    {{paper-chips
-      readOnly=readOnly
-      removeItem=(action "removeSkill")
-      addItem=(action "addSkill")
-      placeholder="Add a skill"
-      content=selectedSkills
-      options=skills
-      requireMatch=true
-    }}
+  <div class="div-left-edit layout-column flex">
+    <div class="layout-row flex">
+      <i class="material-icons icon">perm_identity</i>
+      <h1>Contact</h1>
+    </div>
+      {{form.input class="flex-30" type="email" label="EmailId" required=true value=employee.emailId
+                   onChange=(action (mut employee.emailId)) customValidations=emailValidation}}
+      {{form.input class="flex-30" label="Phone Number" required=true maxlength=10 value=employee.phoneNo
+                   onChange=(action (mut employee.phoneNo))}}
+    <div class="layout-row flex">
+      <i class="material-icons icon">thumb_up</i>
+      <h1>About</h1>
+    </div>
+      {{form.input class="flex-30" label="Bio" textarea=true passThru=(hash rows=3 maxRows=3) maxlength=300 required=true value=employee.bio
+                   onChange=(action (mut employee.bio))}}
+      {{paper-chips
+        readOnly=readOnly
+        removeItem=(action "removeSkill")
+        addItem=(action "addSkill")
+        placeholder="Add a skill"
+        content=selectedSkills
+        options=skills
+        requireMatch=true}}
+      {{form.input class="flex-30" label="picture" required=true value=employee.picture
+                   onChange=(action (mut employee.picture))}}
   </div>
-  <div class="layout layout-sm-column">
-    <div class="flex-30">
-      {{#paper-select
-        label="Employee Project"
-        options=projects
-        required=true
-        selected=employee.project
-        onChange=(action (mut employee.project))
-      as |project|}}
-        {{project}}
-      {{/paper-select}}
+  <div class="div-right-edit layout-column flex">
+    <img class="user-image" src="/assets/images/user.jpeg">
+    <input type='file' id='file-field' />
+    <div class="flex div-rigth-content">
+      <h3>Department</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+        {{#paper-select
+          class="add-content"
+          label="Employee Department"
+          options=departments
+          required=true
+          selected=employee.department
+          onChange=(action (mut employee.department))
+        as |department|}}
+          {{department}}
+        {{/paper-select}}
+      </div>
     </div>
-    <div class="flex-30">
-      {{#paper-select
-        label="Employee Department"
-        options=departments
-        required=true
-        selected=employee.department
-        onChange=(action (mut employee.department))
-      as |department|}}
-        {{department}}
-      {{/paper-select}}
+    <div class="flex div-rigth-content">
+      <h3>Project</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+        {{#paper-select
+          class="add-content"
+          label="Employee Project"
+          options=projects
+          required=true
+          selected=employee.project
+          onChange=(action (mut employee.project))
+        as |project|}}
+          {{project}}
+        {{/paper-select}}
+      </div>
     </div>
-    <div class="flex-30">
-      {{#paper-select
-        label="Report To Employee"
-        options=reportToEmployees
-        selected=employee.reportEmployee
-        onChange=(action (mut employee.reportEmployee))
-      as |reportToEmployee|}}
-        {{reportToEmployee}}
-      {{/paper-select}}
+    <div class="flex div-rigth-content">
+      <h3>Reports To</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">code</i>
+        {{#paper-select
+          class="add-content"
+          label="Report To Employee"
+          options=reportToEmployees
+          selected=employee.reportEmployee
+          onChange=(action (mut employee.reportEmployee))
+        as |reportToEmployee|}}
+          {{reportToEmployee.firstName}} {{reportToEmployee.lastName}}
+        {{/paper-select}}
+      </div>
     </div>
   </div>
 {{/paper-form}}
-{{outlet}}

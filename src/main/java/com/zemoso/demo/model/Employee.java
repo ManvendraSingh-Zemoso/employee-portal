@@ -10,10 +10,10 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class Employee {
+public class Employee extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotNull
     private String firstName;

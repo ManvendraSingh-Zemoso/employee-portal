@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "dependencies": {
-    "jquery-ui": "1.11.3",
-    "moment": "^2.20.1"
+
   }
 }

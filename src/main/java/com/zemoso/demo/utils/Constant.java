@@ -3,6 +3,7 @@ package com.zemoso.demo.utils;
 public class Constant {
 
     private Constant(){}
+    public static final String EMPLOYEE = "employee";
     public static final String ID = "id";
     public static final String FIRSTNAME = "firstName";
     public static final String MIDDLENAME = "middleName";
@@ -19,5 +20,6 @@ public class Constant {
     public static final String PROJECT = "project";
     public static final String REPORT_EMPLOYEE = "reportEmployee";
 
-
+    public static final String NAME = "name";
+    public static final String DESCRIPTION = "description";
 }

@@ -2,7 +2,6 @@ package com.zemoso.demo.utils;
 
 import com.zemoso.demo.model.Employee;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,4 +46,5 @@ public class EmployeeMapper {
         map.put(Constant.REPORT_EMPLOYEE,employee.getReportEmployee());
         return map;
     }
+
 }
