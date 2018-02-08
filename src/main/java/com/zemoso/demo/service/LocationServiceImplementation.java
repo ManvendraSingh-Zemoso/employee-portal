@@ -13,6 +13,10 @@ public class LocationServiceImplementation implements LocationService {
     @Autowired
     private LocationRepository locationRepository;
 
+    /**
+     * Method to get list of location
+     * @return
+     */
     public List<Location> getAllEmployeeLocations(){
         return (List<Location>) locationRepository.findAll();
     }

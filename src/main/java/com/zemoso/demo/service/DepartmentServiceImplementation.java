@@ -13,5 +13,9 @@ public class DepartmentServiceImplementation implements DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    /**
+     * Method to get list of departments
+     * @return
+     */
     public List<Department> getAllEmployeeDepartments(){ return (List<Department>) departmentRepository.findAll();}
 }

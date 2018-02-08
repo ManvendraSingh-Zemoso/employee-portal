@@ -1,12 +1,12 @@
-<div>
+<div class="index-body">
   <div class="layout-row flex">
-    <div class="flex heading"><h1>Employee Portal</h1></div>
+    <div class="flex heading"><h1 class="heading-content">Employee Portal</h1></div>
   </div>
   <div>
     <div class="layout-row layout-wrap flex">
       <div class="flex-20 layout-column first-card">
         <div class="first-card-content">
-          <p>{{model.length}}</p>
+          <p class="card-details">{{model.length}}</p>
           <p>Employees</p>
         </div>
         <div>
@@ -17,7 +17,7 @@
         <div class="flex-20 cards">
           <div class="layout-column  flex" onclick={{action 'openDetails' employee.id}}>
             {{#paper-card class="card" as |card| }}
-              {{card.image size="xl" class="user" src="/assets/images/user.jpeg" alt="User pic not available"}}
+             <img src={{employee.picture}} size="xl" class="user" />
               {{#card.title class="card-title" as |title|}}
                 {{#title.text as |text|}}
                   {{#text.subhead class="details name"}}{{employee.firstName}} {{employee.middleName}} {{employee.lastName}}{{/text.subhead}}

@@ -4,6 +4,7 @@ import com.zemoso.demo.model.Skill;
 import com.zemoso.demo.service.SkillService;
 import com.zemoso.demo.utils.SkillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class to wright rest api calls for skills
+ */
 @Controller
 @RequestMapping(path = "/skills")
 public class SkillController {
@@ -24,6 +28,10 @@ public class SkillController {
     @Autowired
     private SkillMapper skillMapper;
 
+    /**
+     * Method to get the list of skills
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     private ResponseEntity<Map<String,List<Map<String,String>>>> getAllSkills(){
         List<Skill> skillList = skillService.getAllEmployeeSkills();
@@ -34,6 +42,6 @@ public class SkillController {
         });
         Map<String,List<Map<String,String>>> responseMap = new HashMap();
         responseMap.put("skills",response);
-        return ResponseEntity.ok().body(responseMap);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMap);
     }
 }

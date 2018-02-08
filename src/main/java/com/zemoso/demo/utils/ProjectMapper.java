@@ -6,9 +6,17 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class to convert project to map type
+ */
 @Component
 public class ProjectMapper {
 
+    /**
+     *  Method to convert project to map type
+     * @param project
+     * @return
+     */
     public Map<String,String> projectToMap(Project project){
         Map<String,String> map = new HashMap<>();
         map.put(Constant.ID,Long.toString(project.getId()));

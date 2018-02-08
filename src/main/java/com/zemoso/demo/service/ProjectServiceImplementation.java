@@ -13,6 +13,10 @@ public class ProjectServiceImplementation implements ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    /**
+     * Method to get list of projects
+     * @return
+     */
     public List<Project> getAllEmployeeProjects(){
         return (List<Project>) projectRepository.findAll();
     }

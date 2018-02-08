@@ -6,9 +6,17 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class to convert department to map type
+ */
 @Component
 public class DepartmentMapper {
 
+    /**
+     * Method to convert department to map type
+     * @param department
+     * @return
+     */
     public Map<String,String> departmentToMap(Department department){
         Map<String,String> map = new HashMap<>();
         map.put(Constant.ID,Long.toString(department.getId()));

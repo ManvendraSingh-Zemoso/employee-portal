@@ -13,6 +13,10 @@ public class RoleServiceImplementation implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    /**
+     * Method to get list of roles
+     * @return
+     */
     public List<Role> getAllEmployeeRoles(){
         return (List<Role>) roleRepository.findAll();
     }
