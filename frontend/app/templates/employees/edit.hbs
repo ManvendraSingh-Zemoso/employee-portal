@@ -1,0 +1,124 @@
+{{#paper-form onSubmit=(action "saveEditedModel") as |form|}}
+<div class="layout-column flex">
+  <div class="flex heading" onclick={{action "cancel"}}><h1 class="heading-content">Employee Portal</h1></div>
+    <div class="div-top">
+      <div class="layout-row flex edit-content-name">
+        {{form.input label="First Name" class="edit-name" value=employee.firstName onChange=(action (mut employee.firstName)) required=true}}
+        {{form.input label="Middle Name" class="edit-name" value=employee.middleName onChange=(action (mut employee.middleName))}}
+        {{form.input label="Last Name" class="edit-name" value=employee.lastName onChange=(action (mut employee.lastName)) required=true}}
+      </div>
+      {{#paper-select
+        class="edit-content-role"
+        label="Employee Role"
+        options=roleList
+        required=true
+        selected=employee.role
+        onChange=(action (mut employee.role))
+      as |role|}}
+        {{role}}
+      {{/paper-select}}
+      <div class="layout-row flex edit-location">
+        <i class="material-icons div-top-icons">location_city</i>
+        {{#paper-select
+          class="edit-content-location"
+          label="Employee Location"
+          options=locationList
+          required=true
+          selected=employee.location
+          onChange=(action (mut employee.location))
+        as |location|}}
+          {{location}}
+        {{/paper-select}}
+      </div>
+      <div class="layout-row flex edit-date">
+        <i class="material-icons div-top-icons">date_range</i>
+        <p>Started {{pikaday-input class="edit-content-date" required=true selected=employee.joinDate value=employee.joinDate onSelection=(action (mut employee.joinDate))}}</p>
+      </div>
+      <div class="layout-row flex">
+        {{#paper-button class="cancel-button button cancel-edit" raised=true onClick=(action "cancel")}}Cancel{{/paper-button}}
+        {{#form.submit-button class="save-edit" raised=true}}Save{{/form.submit-button}}
+      </div>
+
+    </div>
+  </div>
+  <div class="div-left-edit layout-column flex">
+    <div class="layout-row flex">
+      <i class="material-icons icon">perm_identity</i>
+      <h1 class="edit-contact-heading">Contact</h1>
+    </div>
+    {{form.input class="flex-30 edit-email" type="email" label="EmailId" required=true value=employee.emailId
+                   onChange=(action (mut employee.emailId)) customValidations=emailValidation}}
+    {{form.input class="flex-30 edit-phone" label="Phone Number" type="number" required=true minlength=10 maxlength=12 value=employee.phoneNo
+                   onChange=(action (mut employee.phoneNo))}}
+    <div class="layout-row flex">
+      <i class="material-icons icon">thumb_up</i>
+      <h1 class="edit-about-heading">About</h1>
+    </div>
+    {{form.input class="flex-30" textarea=true block=true label="Bio" maxlength=300 required=true value=employee.bio passThru=(hash rows=3 maxRows=3)
+                   onChange=(action (mut employee.bio))}}
+    {{#power-select-multiple
+      class="power-chips"
+      options=skillList
+      selected=employee.skills
+      placeholder="Add Skills"
+      onchange=(action (mut employee.skills))
+    as |skill|
+    }}
+      {{skill}}
+    {{/power-select-multiple}}
+
+  </div>
+  <div class="div-right-edit layout-column flex">
+    <img class="user-image" src="/{{employee.picture}}">
+    <input type='file' id='file-field' onchange={{action "setImage"}}/>
+    <div class="flex div-right-content">
+      <h3 class="edit-right-heading">Department</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+        {{#paper-select
+          class="edit-select"
+          label="Employee Department"
+          options=departmentList
+          required=true
+          selected=employee.department
+          onChange=(action (mut employee.department))
+        as |department|}}
+          {{department}}
+        {{/paper-select}}
+      </div>
+    </div>
+    <div class="flex div-right-content">
+      <h3 class="edit-right-heading">Project</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+        {{#paper-select
+          class="edit-select"
+          class="edit-content"
+          label="Employee Project"
+          options=projectList
+          required=true
+          selected=employee.project
+          onChange=(action (mut employee.project))
+        as |project|}}
+          {{project}}
+        {{/paper-select}}
+      </div>
+    </div>
+    <div class="flex div-right-content">
+      <h3 class="edit-right-heading">Reports To</h3>
+      <div class="layout-row flex">
+        <i class="material-icons div-right-icons">code</i>
+        {{#paper-select
+          class="edit-select"
+          class="edit-content"
+          label="Report To Employee"
+          options=employeeList
+          selected=employee.reportEmployee
+          onChange=(action (mut employee.reportEmployee))
+        as |reportToEmployee|}}
+          {{reportToEmployee}}
+        {{/paper-select}}
+      </div>
+    </div>
+</div>
+{{/paper-form}}
