@@ -1,0 +1,68 @@
+<div class="layout-column flex">
+  <div class="flex heading" onclick={{action "cancel"}}><h1 class="heading-content">Employee Portal</h1></div>
+  <div class="div-top">
+    <h3 class="details-name">{{model.firstName}} {{model.middleName}} {{model.lastName}}</h3>
+    <h4 class="details-role">{{model.role}}</h4>
+    <div class="layout-row flex location">
+      <i class="material-icons div-top-icons">location_city</i>
+      <p>{{model.location}}</p>
+    </div>
+    <div class="layout-row flex details-content-date">
+      <i class="material-icons div-top-icons">date_range</i>
+      <p>Started {{moment-format model.joinDate 'LL'}}</p>
+    </div>
+    {{#paper-button raised=true primary=true onClick=(action "edit" model.id)}}Edit{{/paper-button}}
+  </div>
+</div>
+<div class="div-left-view layout-column flex">
+  <div class="layout-row flex">
+    <i class="material-icons icon">perm_identity</i>
+    <h1 class="new-contact-heading">Contact</h1>
+  </div>
+  <div class="flex layout-row contact">
+    <p>Email</p>
+    <p class="contact-details">{{model.emailId}}</p>
+  </div>
+  <div class="flex layout-row contact">
+    <p>Mobile</p>
+    <p class="contact-details">{{model.phoneNo}}</p>
+  </div>
+  <div class="layout-row flex">
+    <i class="material-icons icon">thumb_up</i>
+    <h1 class="new-about-heading">About</h1>
+  </div>
+  <div class="flex about">
+    <h4>Bio</h4>
+    <p>{{model.bio}}</p>
+  </div>
+  <div class="flex about">
+    <h4>Skills</h4>
+    {{paper-chips
+    content=model.skills
+    readOnly=readOnly}}
+  </div>
+</div>
+<div class="div-right-view layout-column flex">
+  <img class="user-image" src="/{{model.picture}}">
+  <div class="flex div-rigth-content">
+    <h3>Department</h3>
+    <div class="layout-row flex">
+      <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+      <p>{{model.department}}</p>
+    </div>
+  </div>
+  <div class="flex div-rigth-content">
+    <h3>Project</h3>
+    <div class="layout-row flex">
+      <i class="material-icons div-right-icons">keyboard_arrow_right</i>
+      <p>{{model.project}}</p>
+    </div>
+  </div>
+  <div class="flex div-rigth-content">
+    <h3>Reports To</h3>
+    <div class="layout-row flex">
+      <i class="material-icons div-right-icons">code</i>
+      <p>{{model.reportEmployee}}</p>
+    </div>
+  </div>
+</div>
